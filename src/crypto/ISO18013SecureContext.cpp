@@ -6,7 +6,7 @@
 #include <ISO18013SecureContext.h>
 #include "mbedtls_compat.h"
 #include "DDKLogging.h"
-#include <cbor.h>
+#include "tinycbor/cbor.h"
 #include <vector>
 #include <array>
 #include "SecureBuffer.h"

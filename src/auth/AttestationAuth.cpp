@@ -18,7 +18,7 @@
 #include "sodium.h"
 #endif
 #include "mbedtls_compat.h"
-#include <cbor.h>
+#include "tinycbor/cbor.h"
 #include <vector>
 #include "ddk/transport/ApduChannel.h"
 #include "CoseSign1.h"

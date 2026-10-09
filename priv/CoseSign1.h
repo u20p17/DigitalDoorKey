@@ -1,5 +1,5 @@
 #pragma once
-#include "cbor.h"
+#include "tinycbor/cbor.h"
 #include "ddk/Span.h"
 #include <cstdint>
 #include <optional>

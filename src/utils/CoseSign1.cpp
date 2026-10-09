@@ -1,7 +1,7 @@
 #include "CoseSign1.h"
 #include "CommonCryptoUtils.h"
 #include "DDKLogging.h"
-#include <cbor.h>
+#include "tinycbor/cbor.h"
 #include "mbedtls_compat.h"
 #include <cstring>
 
