@@ -5,7 +5,7 @@
 #include "DDKLogging.h"
 #include <chrono>
 
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include <esp_random.h>
 #else
 #include "sodium.h"
@@ -44,7 +44,7 @@ Session::Session(std::shared_ptr<ApduChannel> apdu,
     transcript_.reader_eph_pub  = pub;
     transcript_.reader_eph_x     = CommonCryptoUtils::get_x(transcript_.reader_eph_pub);
 
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
     esp_fill_random(transcript_.transaction_id.data(), 16);
 #else
     randombytes(transcript_.transaction_id.data(), 16);

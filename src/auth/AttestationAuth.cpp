@@ -12,13 +12,13 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include <esp_random.h>
 #else 
 #include "sodium.h"
 #endif
 #include "mbedtls_compat.h"
-#include "tinycbor/cbor.h"
+#include <cbor.h>
 #include <vector>
 #include "ddk/transport/ApduChannel.h"
 #include "CoseSign1.h"
@@ -151,7 +151,7 @@ std::vector<unsigned char> HKAttestationAuth::envelope2Cmd(std::vector<uint8_t> 
   cbor_encoder_close_container(&docType, &docMap);
 
   LOG(V, "ENV2 CBOR");
-  #if defined(CONFIG_IDF_CMAKE)
+  #if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
   ESP_LOG_BUFFER_HEX_LEVEL(TAG, doctype, cbor_encoder_get_buffer_size(&docType, doctype), ESP_LOG_VERBOSE);
   #else
   for (int i = 0; i < cbor_encoder_get_buffer_size(&docType, doctype); i++) {
@@ -179,7 +179,7 @@ std::vector<unsigned char> HKAttestationAuth::envelope2Cmd(std::vector<uint8_t> 
   cbor_encoder_close_container(&doc, &docReq);
   size_t docSize = cbor_encoder_get_buffer_size(&doc, docBuf);
   LOG(V, "ENV2 CBOR");
-  #if defined(CONFIG_IDF_CMAKE)
+  #if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
   ESP_LOG_BUFFER_HEX_LEVEL(TAG, docBuf, docSize, ESP_LOG_VERBOSE);
   #else
   for (int i = 0; i < docSize; i++) {
@@ -387,7 +387,7 @@ HKAttestationVerificationResult HKAttestationAuth::verify(std::vector<uint8_t>& 
 HKAttestationResult HKAttestationAuth::attest()
 {
     attestation_exchange_common_secret.resize(32);
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
   esp_fill_random(attestation_exchange_common_secret.data(), 32);
 #else
   randombytes(attestation_exchange_common_secret.data(), 32);

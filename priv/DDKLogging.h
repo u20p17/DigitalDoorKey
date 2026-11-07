@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <stdint.h>
 
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include <esp_log.h>
 #else
 #include <cstdio>
@@ -65,7 +65,7 @@ public:
 
 } // namespace DDK
 
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
     #define DDK_LOG(level, tag, fmt, ...) ESP_LOG##level(tag, "[%s:%d] " fmt, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
     #define DDK_LOG(level, tag, fmt, ...) std::printf("[%s][%s][%s:%d] " fmt "\n", #level, tag, __FUNCTION__, __LINE__, ##__VA_ARGS__)

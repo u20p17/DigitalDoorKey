@@ -6,7 +6,7 @@
 #include "mbedtls_compat.h"
 #include <cstdint>
 #include "DDKLogging.h"
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include <esp_log.h>
 #endif
 

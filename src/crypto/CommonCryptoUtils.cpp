@@ -12,7 +12,7 @@
 
 #include "mbedtls_compat.h"
 #include <psa/crypto.h>
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include <esp_random.h>
 #else 
 #include "sodium.h"
@@ -24,7 +24,7 @@ namespace CommonCryptoUtils
 
   int esp_rng(void *, uint8_t *buf, size_t len)
   {
-    #if defined(CONFIG_IDF_CMAKE)
+    #if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
     esp_fill_random(buf, len);
     #else 
     randombytes(buf, len);

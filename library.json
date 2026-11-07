@@ -3,20 +3,13 @@
     "version": "1.0.1",
     "license": "MIT",
     "frameworks": [
-        "arduino"
+        "arduino",
+        "espidf"
     ],
     "platforms": [
         "espressif32"
     ],
     "build": {
-        "srcFilter": [
-            "+<*>",
-            "-<aliro/>",
-            "-<auth/Aliro*>",
-            "-<crypto/GcmSecureChannel.cpp>",
-            "-<utils/BerTlv.cpp>",
-            "-<transport/Ble*>"
-        ],
         "extraScript": "platformio.py"
     }
 }

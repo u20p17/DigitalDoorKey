@@ -1,11 +1,11 @@
 #include "CoseSign1.h"
 #include "CommonCryptoUtils.h"
 #include "DDKLogging.h"
-#include "tinycbor/cbor.h"
+#include <cbor.h>
 #include "mbedtls_compat.h"
 #include <cstring>
 
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include <sodium/crypto_sign_ed25519.h>
 #else
 #include "sodium.h"

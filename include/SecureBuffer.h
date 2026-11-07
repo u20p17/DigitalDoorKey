@@ -5,13 +5,13 @@
 #include <cstdint>
 #include <initializer_list>
 
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
 #include "mbedtls_compat.h"
 #endif
 
 inline void secure_zero(void* p, size_t len) {
     if (p && len > 0) {
-#if defined(CONFIG_IDF_CMAKE)
+#if defined(ESP_PLATFORM) || defined(ARDUINO_ARCH_ESP32)
         mbedtls_platform_zeroize(p, len);
 #else
         volatile uint8_t* vp = (volatile uint8_t*)p;
